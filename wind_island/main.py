@@ -4,6 +4,7 @@ from campsite import CampSite
 
 pygame.init()
 SCREEN_WIDTH, SCREEN_HEIGHT = 800, 480
+WORLD_WIDTH = 1000
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
 
@@ -12,6 +13,8 @@ camps = [CampSite(400, SCREEN_HEIGHT - 40), CampSite(900, SCREEN_HEIGHT - 40)]
 
 running = True
 camera_x = 0
+camera_x_min = 0
+camera_x_max = WORLD_WIDTH - SCREEN_WIDTH
 
 while running:
     dt = clock.tick(60) / 1000  # delta time
@@ -21,14 +24,14 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    player.update(keys, dt)
+    player.update(keys, dt, WORLD_WIDTH)
 
     # Интеракция с лагерем
     if keys[pygame.K_e]:
         for camp in camps:
             if player.rect.colliderect(camp.rect):
                 camp.interact()
-
+    
     for camp in camps:
         camp.update(keys)
 
