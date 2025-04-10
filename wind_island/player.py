@@ -6,6 +6,7 @@ class Player:
         self.image.fill((255, 255, 0))
         self.rect = pygame.Rect(x, y, 32, 48)
         self.speed = 200
+        self.coins = 5
 
     def update(self, keys, dt, world_width):
         if keys[pygame.K_LEFT]:
